@@ -1,6 +1,30 @@
 {% extends "layout.html" %}
 
 {% block title %}
-<title>Name's Interests!</title>
+<title>{{ name }}'s Interests!</title>
 {% endblock %}
 
+{% block content %}
+<header>
+    <h1>{{ name }}'s Interests!</h1>
+</header>
+<div id="email">
+    <h2>Welcome to {{ name }}'s page.</h2>
+    <p><strong>Email: </strong><a href="mailto: {{ email }}">{{ email }}</a></p>
+</div>
+<div id="interests">
+    <h3>{{ name }}'s Interests:</h3>
+    <p>{{ interests }}</p>
+</div>
+<div id="other_users">
+    <h4>Other Users:</h4>
+    <ul>
+        {% for other in others %}
+        <a href="{{ url_for('user', name=other)}}"><li>{{ other }}</li></a>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <a href="{{ url_for('home') }}"><p>Home Page</p></a>
+</div>
+{% endblock %}

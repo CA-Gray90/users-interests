@@ -5,14 +5,17 @@
 {% endblock %}
 
 {% block content %}
+<header>
+    <h1>Users Interests!</h1>
+</header>
 <div>
     <h2>Welcome to Users Interests</h2>
     <p>A place for users to put down thier interests.</p>
 </div>
 <div>
     <ul>
-    {% for user in content %}
-        <li>{{ user }}</li>
+    {% for user_name in content %}
+        <a href="{{ url_for('user', name=user_name)}}"><li>{{ user_name }}</li></a>
     {% endfor %}
     </ul>
 </div>
