@@ -14,7 +14,7 @@
 </div>
 <div>
     <ul>
-    {% for user_name in content %}
+    {% for user_name in users %}
         <a href="{{ url_for('user', name=user_name)}}"><li>{{ user_name }}</li></a>
     {% endfor %}
     </ul>

@@ -13,3 +13,9 @@ nora:
 hiroko:
   email: hiroko.ohara@hotmail.com
   interests: []
+
+charles:
+  email: ''
+  interests:
+    - bjj
+    - hiking

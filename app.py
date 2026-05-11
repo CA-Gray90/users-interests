@@ -12,28 +12,33 @@ def get_total_interests():
 
 @app.route('/')
 def index():
-    users = [user.capitalize() for user in users_dict.keys()]
-    return render_template("home.html",
-                           content=users,
-                           total_interests=get_total_interests(),
-                           total_users=len(users_dict))
+    return redirect('/home')
 
 @app.route('/home')
 def home():
-    return redirect('/')
+    users = [user.capitalize() for user in users_dict.keys()]
+    return render_template("home.html",
+                           users=users,
+                           total_interests=get_total_interests(),
+                           total_users=len(users_dict))
 
 def get_user_details(name):
     users_details = users_dict.get(name.lower())
-    email = users_details["email"]
-    if users_details["interests"]:
-        interests = ', '.join(name.capitalize() for name in users_details["interests"]) + '.'
-    else:
-        interests = f'{name} has listed no interests.'
+    if users_details:
+        email = users_details.get("email", 'None listed')
+
+        if users_details["interests"]:
+            interests = ', '.join(name.capitalize() for name in users_details["interests"]) + '.'
+        else:
+            interests = f'{name} has listed no interests.'
     
     return (email, interests)
 
 @app.route('/user/<name>')
 def user(name):
+    if name.lower() not in users_dict.keys():
+        return redirect('/home')
+
     email, interests = get_user_details(name)
     other_users = [user.capitalize() for user in users_dict.keys()
                    if user != name.lower()]
